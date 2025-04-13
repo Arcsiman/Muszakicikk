@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common'; 
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { RouterOutlet } from '@angular/router';
 import { Product } from '../../shared/models/product'; 
 import { PricePipe } from '../../shared/pipes/price.pipe'; 
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -11,7 +11,7 @@ import { Category } from '../../shared/models/category';
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, RouterLink, PricePipe, MatTooltipModule, MatIconModule, MatProgressBarModule], // CommonModule hozzáadása az imports tömbhöz
+  imports: [CommonModule, RouterOutlet, PricePipe, MatTooltipModule, MatIconModule, MatProgressBarModule], // CommonModule hozzáadása az imports tömbhöz
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss'
 })
