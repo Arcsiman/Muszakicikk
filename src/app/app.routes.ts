@@ -4,6 +4,7 @@ import { SignupComponent } from './pages/signup/signup.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.component';
 import { LoginComponent } from './pages/login/login.component';
+import { ProductsComponent } from './pages/products/products.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -16,7 +17,7 @@ export const routes: Routes = [
     { path: 'signup', component: SignupComponent }, // Signup útvonal hozzáadása
 
     { path: 'profile', component: ProfileComponent },
-
+    { path: 'products', component: ProductsComponent },
    
     { path: '**', component: PageNotFoundComponent },
 

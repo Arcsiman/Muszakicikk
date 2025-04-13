@@ -25,18 +25,15 @@ import { Subscription } from 'rxjs';
     RouterLink
   ],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'] // Javítva a styleUrl hibát
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnDestroy {
   email = new FormControl('');
   password = new FormControl('');
-  isLoading: boolean = false;
   loginError: string = '';
-  showLoginForm: boolean = true;
+  loginState: 'form' | 'loading' | 'error' = 'form';
   loadingSubscription?: Subscription;
 
-
-  // Tesztfelhasználó adatai
   private testUser = {
     email: 'test@gmail.com',
     password: 'testpw'
@@ -44,37 +41,35 @@ export class LoginComponent implements OnDestroy {
 
   constructor(private loadingService: FakeLoadingService, private router: Router) {}
 
-  // PROMISE login
   login() {
     this.loginError = '';
 
-    if (this.email.value === 'test@gmail.com' && this.password.value === 'testpw') {
-      this.isLoading = true;
-      this.showLoginForm = false;
-
+    if (this.email.value === this.testUser.email && this.password.value === this.testUser.password) {
+      this.loginState = 'loading';
       localStorage.setItem('isLoggedIn', 'true');
 
       this.loadingService.loadingWithPromise().then((data: number) => {
         if (data === 3) {
-          this.router.navigate(['/home']); // Javítva a window.location.href
+          this.router.navigate(['/home']);
         }
       }).catch((error: any) => {
         console.error(error);
-        this.isLoading = false;
-        this.showLoginForm = true;
         this.loginError = 'Loading error occurred!';
+        this.loginState = 'error';
       }).finally(() => {
         console.log("This executed finally!");
       });
     } else {
       this.loginError = 'Invalid email or password!';
+      this.loginState = 'error';
     }
   }
 
-  // OBSERVABLE login
   loginWithObservable() {
     const emailValue = this.email.value || '';
     const passwordValue = this.password.value || '';
+    this.loginState = 'loading';
+
     this.loadingSubscription = this.loadingService.loadingWithObservable2(emailValue, passwordValue).subscribe({
       next: (data: boolean) => {
         if (data) {
@@ -84,14 +79,13 @@ export class LoginComponent implements OnDestroy {
       },
       error: (error: any) => {
         console.error(error);
-        this.isLoading = false;
-        this.showLoginForm = true;
         this.loginError = 'Invalid email or password!';
+        this.loginState = 'error';
       }
     });
   }
 
   ngOnDestroy() {
-    this.loadingSubscription?.unsubscribe(); // Javítva az unsubscribe hívás
+    this.loadingSubscription?.unsubscribe();
   }
 }

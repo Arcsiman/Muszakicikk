@@ -7,7 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-//import { User } from '../../shared/models/User';
+import { User } from '../../shared/models/user'; // Importálva
 
 @Component({
   selector: 'app-signup',
@@ -35,10 +35,11 @@ export class SignupComponent {
       lastname: new FormControl('', [Validators.required, Validators.minLength(2)])
     })
   });
-  
+
   isLoading = false;
   showForm = true;
   signupError = '';
+  registeredUser?: User;
 
   constructor(private router: Router) {}
 
@@ -48,30 +49,28 @@ export class SignupComponent {
       return;
     }
 
-    const password = this.signUpForm.get('password');
-    const rePassword = this.signUpForm.get('rePassword');
+    const password = this.signUpForm.get('password')?.value;
+    const rePassword = this.signUpForm.get('rePassword')?.value;
 
-    if (password?.value !== rePassword?.value) {
+    if (password !== rePassword) {
+      this.signupError = 'Passwords do not match.';
       return;
     }
+
+    // Interfészt használó felhasználó-objektum létrehozása
+    const user: User = {
+      id: 1,
+      email: this.signUpForm.get('email')?.value || '',
+      password: password || '',
+      firstname: this.signUpForm.get('name.firstname')?.value || '',
+      lastname: this.signUpForm.get('name.lastname')?.value || ''
+    };
+
+    this.registeredUser = user;
 
     this.isLoading = true;
     this.showForm = false;
 
-    /*const newUser: User = {
-      name: {
-        firstname: this.signUpForm.value.name?.firstname || '',
-        lastname: this.signUpForm.value.name?.lastname || ''
-      },
-      email: this.signUpForm.value.email || '',
-      password: this.signUpForm.value.password || '',
-      tasks: [],
-      completed_tasks: []
-    };
-
-    console.log('New user:', newUser);
-    console.log('Form value:', this.signUpForm.value);
-*/
     setTimeout(() => {
       this.router.navigateByUrl('/home');
     }, 2000);

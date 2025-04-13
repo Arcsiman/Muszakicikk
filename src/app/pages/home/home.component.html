@@ -6,8 +6,19 @@
       <p>Fedezd fel a legjobb műszaki cikkeket és ajánlatokat!</p>
     </div>
     <div class="action-section">
-      <button mat-flat-button color="primary" [routerLink]="['/login']" class="login-button">
+      <button mat-flat-button color="primary" [routerLink]="['/login']" class="log-button">
         Bejelentkezés
       </button>
+    <div class="action-section">
+    <button
+      *ngIf="isLoggedIn"
+      mat-stroked-button
+      color="warn"
+      (click)="logout()"
+      class="log-button">
+      Kijelentkezés
+    </button>
+    </div>
     </div>
   </div>
+  

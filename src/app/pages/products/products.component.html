@@ -1,0 +1,14 @@
+<!-- Menü hozzáadása -->
+<router-outlet></router-outlet><!-- Menü hozzáadása -->
+<div class="home-container">
+    <div class="product-list">
+      <h2>Termékek</h2>
+      <div *ngFor="let product of products" class="product-item">
+        <h3>{{ product.name }}</h3>
+        <p>Ár: {{ product.price }} Ft</p>
+        <p>Készleten: {{ product.stock }} db</p>
+        <button mat-flat-button color="primary">Kosárba</button>
+      </div>
+    </div>
+  </div>
+  
