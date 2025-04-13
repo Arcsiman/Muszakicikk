@@ -1,14 +1,28 @@
-<!-- Menü hozzáadása -->
-<router-outlet></router-outlet><!-- Menü hozzáadása -->
+<router-outlet></router-outlet>
 <div class="home-container">
-    <div class="product-list">
-      <h2>Termékek</h2>
-      <div *ngFor="let product of products" class="product-item">
-        <h3>{{ product.name }}</h3>
-        <p>Ár: {{ product.price }} Ft</p>
-        <p>Készleten: {{ product.stock }} db</p>
-        <button mat-flat-button color="primary">Kosárba</button>
-      </div>
+  <div class="category-list">
+    <h2>Kategóriák</h2>
+    <div *ngFor="let category of categories" class="category-item">
+      <h3>{{ category.name }}</h3>
+      <p>{{ category.description }}</p>
     </div>
   </div>
+  <div class="product-list">
+    <h2>Termékek</h2>
+  
+  
+    <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+  
+    <div *ngFor="let product of products" class="product-item">
+      <h3>{{ product.name }}</h3>
+      <p>Ár: {{ product.price | price }}</p>
+      <p>Készleten: {{ product.stock }} db</p>
+      <p>Kategória: {{ product.category.name }}</p> <!-- Kategória kiírása -->
+      <button mat-icon-button matTooltip="Kosárba helyezés">
+        <mat-icon>add_shopping_cart</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>
+  
   

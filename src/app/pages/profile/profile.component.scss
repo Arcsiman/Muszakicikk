@@ -1,11 +1,18 @@
-/* Profil oldal wrapper */
 .profile-wrapper {
     display: flex;
     justify-content: center;
     padding: 50px 40px;
   }
+  .info-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 1rem 0;
+    font-size: 18px;
+    color: #000000; 
+    font-weight: 500;
+  }
   
-  /* Profil kártya */
   .profile-card {
     width: 100%;
     max-width: 450px;
@@ -23,7 +30,7 @@
     }
   }
   
-  /* Avatar ikon */
+  
   .avatar-icon {
     font-size: 64px;
     margin-bottom: 16px;
@@ -37,7 +44,7 @@
     color: #fff;
   }
   
-  /* Információk sorai */
+  
   .info-row {
     display: flex;
     align-items: center;
@@ -48,7 +55,7 @@
     font-weight: 500;
   }
   
-  /* Reszponzív dizájn */
+  
   @media (max-width: 600px) {
     .avatar-icon {
       font-size: 48px;
@@ -64,27 +71,27 @@
       padding: 24px;
     }
   }
-/* Gomb stílusok */
+
 button {
     padding: 10px 24px;
     font-size: 16px;
     font-weight: 600;
     border-radius: 12px;
     background-color: #ff6f00;
-    color: #fff !important; /* Kényszerített fehér szín a szöveghez */
+    color: #fff !important; 
     border: none;
     transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
     text-transform: uppercase;
   
     &:hover {
-      background-color: #ff9800; /* Lighter shade of orange */
+      background-color: #ff9800; 
       transform: translateY(-3px);
       box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
     }
   
     &:active {
-      background-color: #f57c00; /* Darker shade of orange */
+      background-color: #f57c00; 
       transform: translateY(0);
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }

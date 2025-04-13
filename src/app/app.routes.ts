@@ -8,13 +8,13 @@ import { ProductsComponent } from './pages/products/products.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
-    // Statikus elérési útvonalak
+    
     { path: 'home', component: HomeComponent },
-    // Lazy loading a Tasks komponens
+    
     
     { path: 'login', component: LoginComponent },
 
-    { path: 'signup', component: SignupComponent }, // Signup útvonal hozzáadása
+    { path: 'signup', component: SignupComponent }, 
 
     { path: 'profile', component: ProfileComponent },
     { path: 'products', component: ProductsComponent },

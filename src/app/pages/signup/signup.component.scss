@@ -1,4 +1,3 @@
-/* Regisztrációs konténer */
 .signup-container {
     max-width: 500px;
     margin: 100px auto;
@@ -25,7 +24,7 @@
     }
   }
   
-  /* Regisztrációs űrlap */
+  
   .signup-form {
     display: flex;
     flex-direction: column;
@@ -59,7 +58,7 @@
     }
   }
   
-  /* Név mezők sora */
+  
   .name-row {
     display: flex;
     gap: 16px;
@@ -71,7 +70,7 @@
     }
   }
   
-  /* Gombok sora */
+  
   .buttons-row {
     display: flex;
     gap: 16px;
@@ -80,7 +79,7 @@
     flex-wrap: wrap;
   }
   
-  /* Betöltés állapot */
+  
   .loading-container {
     display: flex;
     flex-direction: column;
@@ -102,7 +101,7 @@
     }
   }
   
-  /* Reszponzív */
+ 
   @media (max-width: 576px) {
     .signup-container {
       padding: 28px 20px;

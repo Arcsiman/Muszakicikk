@@ -1,13 +1,14 @@
 
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common'; // CommonModule importálása
+import { CommonModule } from '@angular/common'; 
 import { MatButtonModule } from '@angular/material/button';
+
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterLink, RouterOutlet, CommonModule, MatButtonModule], // CommonModule hozzáadása
+  imports: [RouterLink, RouterOutlet, CommonModule, MatButtonModule], 
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
@@ -15,8 +16,7 @@ export class HomeComponent implements OnInit {
   isLoggedIn: boolean = false;
 
 
-  ngOnInit(): void {
-    // Ellenőrizzük a belépett állapotot a localStorage alapján
+  ngOnInit(): void { 
     this.isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
   }
 
@@ -27,22 +27,3 @@ export class HomeComponent implements OnInit {
 }
 
 
-/*
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { RouterLink } from '@angular/router';
-
-@Component({
-  selector: 'app-home',
-  standalone: true,
-  imports: [RouterLink], // RouterLink importálása
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
-})
-export class HomeComponent {
-  constructor(private router: Router) {}
-
-  changePage(): void {
-    this.router.navigate(['/login']); // Navigálás a login oldalra
-  }
-}*/

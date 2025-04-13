@@ -21,11 +21,22 @@
           <mat-icon>lock</mat-icon>
           <span>{{ registeredUser.password }}</span>
         </div>
+        <mat-divider></mat-divider>
+
+        
+   
       </mat-card-content>
-  
+
+
       <mat-card-actions align="end">
         <button mat-stroked-button color="primary">Edit</button>
       </mat-card-actions>
+      <h3>Cart Items</h3>
+        <div *ngFor="let item of cartItems" class="info-row">
+          <mat-icon>shopping_cart</mat-icon>
+          <span>{{ item.productName }} - {{ item.quantity }} db</span>
+        </div>
     </mat-card>
+    
   </div>
   

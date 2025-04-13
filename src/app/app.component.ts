@@ -6,7 +6,7 @@ import { RouterOutlet } from '@angular/router';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [MenuComponent, RouterOutlet], // Menü és RouterOutlet importálása
+  imports: [MenuComponent, RouterOutlet], 
   template: `
     <app-menu></app-menu>
     <router-outlet></router-outlet>
@@ -14,5 +14,5 @@ import { RouterOutlet } from '@angular/router';
 })
 
 export class AppComponent {
-  title = 'Muszakicikk'; // Definiáld a title tulajdonságot
+  title = 'Muszakicikk'; 
 }

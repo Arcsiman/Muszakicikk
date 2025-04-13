@@ -1,8 +1,10 @@
-export interface User {
-    id: number; // Opcionális azonosító
-    email: string; // Felhasználó email-címe
-    password: string; // Felhasználó jelszava
-    firstname: string; // Keresztnév
-    lastname: string; // Vezetéknév
+import { CartItem } from './cartitem';
 
+export interface User {
+    id: number; 
+    email: string; 
+    password: string; 
+    firstname: string; 
+    lastname: string; 
+    cartitem?: CartItem[];
   }

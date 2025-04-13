@@ -7,7 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { User } from '../../shared/models/user'; // Importálva
+import { User } from '../../shared/models/user'; 
 
 @Component({
   selector: 'app-signup',
@@ -57,13 +57,14 @@ export class SignupComponent {
       return;
     }
 
-    // Interfészt használó felhasználó-objektum létrehozása
+  
     const user: User = {
       id: 1,
       email: this.signUpForm.get('email')?.value || '',
       password: password || '',
       firstname: this.signUpForm.get('name.firstname')?.value || '',
       lastname: this.signUpForm.get('name.lastname')?.value || ''
+  
     };
 
     this.registeredUser = user;

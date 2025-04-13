@@ -1,6 +1,9 @@
+import { Category } from './category';
+
 export interface Product {
-    id: number; // Egyedi azonosító
-    name: string; // Termék neve
-    price: number; // Termék ára
-    stock: number; // Készleten lévő darabszám
-  }
+  id: number; 
+  name: string; 
+  price: number; 
+  stock: number; 
+  category: Category; 
+}

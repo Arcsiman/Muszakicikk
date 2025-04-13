@@ -7,10 +7,10 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   selector: 'app-menu',
   standalone: true,
   imports: [
-    MatListModule, // MatNavList támogatása
-    MatIconModule, // MatIcon támogatása
-    RouterLink, // RouterLink támogatása
-    RouterLinkActive // RouterLinkActive támogatása
+    MatListModule, 
+    MatIconModule, 
+    RouterLink, 
+    RouterLinkActive 
   ],
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss']
@@ -18,6 +18,5 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 export class MenuComponent {
   closeMenu(): void {
     console.log('Menu closed');
-    // Itt adhatsz hozzá logikát, például egy oldalsó menü bezárását
   }
 }
