@@ -1,0 +1,31 @@
+<div class="profile-wrapper">
+    <mat-card class="profile-card" appearance="outlined">
+      <mat-card-header>
+        <mat-icon color="primary" class="avatar-icon">account_circle</mat-icon>
+        <mat-card-title>User Profile</mat-card-title>
+        <mat-card-subtitle>Registered Information</mat-card-subtitle>
+      </mat-card-header>
+  
+      <mat-divider></mat-divider>
+  
+      <mat-card-content>
+        <div class="info-row">
+          <mat-icon>email</mat-icon>
+          <span>{{ registeredUser.email }}</span>
+        </div>
+        <div class="info-row">
+          <mat-icon>person</mat-icon>
+          <span>{{ registeredUser.firstname }} {{ registeredUser.lastname }}</span>
+        </div>
+        <div class="info-row">
+          <mat-icon>lock</mat-icon>
+          <span>{{ registeredUser.password }}</span>
+        </div>
+      </mat-card-content>
+  
+      <mat-card-actions align="end">
+        <button mat-stroked-button color="primary">Edit</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  
