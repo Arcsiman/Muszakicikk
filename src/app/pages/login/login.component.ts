@@ -1,6 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -9,7 +9,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CommonModule } from '@angular/common';
 import { FakeLoadingService } from '../../shared/services/fake-loading.service';
 import { Subscription } from 'rxjs';
-
+import { AuthService } from '../../shared/services/auth.service';
 
 
 
@@ -31,9 +31,11 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnDestroy {
-  email = new FormControl('');
-  password = new FormControl('');
+  email = new FormControl('', [Validators.required, Validators.email]);
+  password = new FormControl('', [Validators.required, Validators.minLength(6)]);
+  isLoading: boolean = false;
   loginError: string = '';
+  showLoginForm: boolean = true;
   loginState: 'form' | 'loading' | 'error' = 'form';
   loadingSubscription?: Subscription;
 
@@ -42,33 +44,56 @@ export class LoginComponent implements OnDestroy {
     password: 'testpw'
   };
 
-  constructor(private loadingService: FakeLoadingService, private router: Router) {}
+  //constructor(private loadingService: FakeLoadingService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ){}
+
 
   login() {
-    this.loginError = '';
-
-    if (this.email.value === this.testUser.email && this.password.value === this.testUser.password) {
-      this.loginState = 'loading';
-      localStorage.setItem('isLoggedIn', 'true');
-
-      this.loadingService.loadingWithPromise().then((data: number) => {
-        if (data === 3) {
-          this.router.navigate(['/home']);
-        }
-      }).catch((error: any) => {
-        console.error(error);
-        this.loginError = 'Loading error occurred!';
-        this.loginState = 'error';
-      }).finally(() => {
-        console.log("This executed finally!");
-      });
-    } else {
-      this.loginError = 'Invalid email or password!';
-      this.loginState = 'error';
+    if(this.email.invalid){
+      this.loginError = 'Invalid email format!';
+      return;
     }
+    if(this.password.invalid){
+      this.loginError = 'Invalid password format!';
+      return;
+    }
+    const emailValue = this.email.value || '';
+    const passwordValue = this.password.value || '';
+
+    this.isLoading = true;
+    this.showLoginForm = false;
+    this.loginError = '';
+    
+    this.authService.signIn(emailValue, passwordValue).then((userCredential) => {
+      console.log('Login successful:', userCredential.user);
+      this.authService.updateLoginStatus(true);
+      this.router.navigateByUrl('/home');
+    })
+    .catch((error) => {
+      console.error('Login failed:', error);
+      this.isLoading = false;
+      this.showLoginForm = true;
+     
+      switch(error.code){
+        case 'auth/user-not-found':
+          this.loginError = 'User not found!';
+          break;
+        case 'auth/wrong-password':
+          this.loginError = 'Wrong password!';
+          break;
+        case 'auth/invalid-credential':
+          this.loginError = 'Invalid email or password!';
+          break;
+        default:
+          this.loginError = 'Authentication failed!';
+      }
+    });
   }
 
-  loginWithObservable() {
+  /*loginWithObservable() {
     const emailValue = this.email.value || '';
     const passwordValue = this.password.value || '';
     this.loginState = 'loading';
@@ -86,7 +111,7 @@ export class LoginComponent implements OnDestroy {
         this.loginState = 'error';
       }
     });
-  }
+  }*/
 
   ngOnDestroy() {
     this.loadingSubscription?.unsubscribe();
