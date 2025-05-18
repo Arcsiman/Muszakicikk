@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Firestore, doc, getDoc } from '@angular/fire/firestore';
 import { AuthService } from './auth.service';
-import { Observable, from, of } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { Observable, firstValueFrom, from, of } from 'rxjs';
+import { switchMap, take } from 'rxjs/operators';
 import { User } from '../models/user';
 import { CartItem } from '../models/cartitem';
+import { updateDoc } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,14 @@ export class UserService {
     private firestore: Firestore,
     private authService: AuthService
   ) { }
+  async updateUserProfile(data: Partial<Pick<User, 'firstname' | 'lastname' | 'cartitem'>>): Promise<void> {
+    const authUser = await firstValueFrom(this.authService.currentUser.pipe(take(1)));
+    if (!authUser) {
+      throw new Error('Nincs bejelentkezett felhasználó!');
+    }
+    const userDocRef = doc(this.firestore, 'Users', authUser.uid);
+    await updateDoc(userDocRef, data);
+  }
 
   getUserProfile(): Observable<{
     user: User | null,
