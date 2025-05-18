@@ -11,6 +11,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { ShortNamePipe } from '../../shared/pipes/name.pipe';
 
 
 
@@ -25,7 +26,8 @@ import { MatInputModule } from '@angular/material/input';
     MatDividerModule,
     ReactiveFormsModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    ShortNamePipe
   ],
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']

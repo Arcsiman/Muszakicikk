@@ -25,13 +25,25 @@ import { Subscription } from 'rxjs';
 export class MenuComponent implements OnInit , AfterViewInit, OnDestroy{
   @Input() sidenav!: MatSidenav;
   @Input() isLoggedIn: boolean = false;
+  @Input() userName: string = '';         
+  @Input() menuTitle: string = '';        
+
   @Output() logoutEvent = new EventEmitter<void>();
+  @Output() menuOpened = new EventEmitter<void>();   
+  @Output() menuClosed = new EventEmitter<void>();   
 
   private authSubscription?: Subscription;
 
   constructor(private authService: AuthService) {
     console.log('MenuComponent constructor');
   }
+  openMenu() {
+    this.menuOpened.emit();
+    if(this.sidenav) {
+      this.sidenav.open();
+    }
+  }
+  
 
   ngOnInit(): void {
     console.log('MenuComponent ngOnInit');
