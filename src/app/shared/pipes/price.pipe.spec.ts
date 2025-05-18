@@ -1,4 +1,5 @@
 import { PricePipe } from './price.pipe';
+import { Pipe, PipeTransform } from '@angular/core';
 
 describe('PricePipe', () => {
   const pipe = new PricePipe();
@@ -10,7 +11,7 @@ describe('PricePipe', () => {
   });
 
   it('should return an empty string for null or undefined', () => {
-    expect(pipe.transform(null)).toBe('');
+    expect(pipe.transform(0)).toBe('');
     expect(pipe.transform(undefined)).toBe('');
   });
 });

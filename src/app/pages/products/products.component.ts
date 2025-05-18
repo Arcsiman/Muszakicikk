@@ -21,12 +21,12 @@ export class ProductsComponent {
 
   categories: Category[] = [
     {
-      id: 1,
+      id: '1',
       name: 'Elektronika',
       description: 'Műszaki cikkek, például laptopok, telefonok és egyéb elektronikai eszközök.'
     },
     {
-      id: 2,
+      id: '2',
       name: 'Audio',
       description: 'Audio cuccok.'
     }
@@ -34,9 +34,9 @@ export class ProductsComponent {
   constructor() {
     setTimeout(() => {
       this.products = [
-        { id: 1, name: 'Laptop', price: 299999, stock: 10 , category: this.categories[0]},
-        { id: 2, name: 'Okostelefon', price: 99999, stock: 25 ,category: this.categories[0]},
-        { id: 3, name: 'Fülhallgató', price: 19999, stock: 50 ,category: this.categories[1]}
+        { id: '1', name: 'Laptop', price: 299999, stock: 10 , category: this.categories[0]},
+        { id: '2', name: 'Okostelefon', price: 99999, stock: 25 ,category: this.categories[0]},
+        { id: '3', name: 'Fülhallgató', price: 19999, stock: 50 ,category: this.categories[1]}
       ];
       this.isLoading = false; 
     }, 2000);
