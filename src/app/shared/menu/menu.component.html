@@ -7,6 +7,12 @@
       <mat-icon matListItemIcon>shopping_cart</mat-icon>
       <span matListItemTitle>Products</span>
     </a> 
+    @if(isLoggedIn){
+      <a mat-list-item routerLink="/specification" routerLinkActive="active-list-item" (click)="closeMenu()">
+      <mat-icon matListItemIcon>description</mat-icon>
+      <span matListItemTitle>Specifikációk</span>
+      </a>
+    }
      @if(isLoggedIn){
         <a mat-list-item routerLink="/profile" routerLinkActive="active-list-item" (click)="closeMenu()">
         <mat-icon matListItemIcon>person</mat-icon>

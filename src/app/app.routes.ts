@@ -7,6 +7,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { authGuard } from './shared/guards/auth/auth.guard';
 import { publicGuard } from './shared/guards/auth/auth.guard';
+import { SpecificationComponent } from './pages/specification/specification.component';
 
 
 
@@ -41,6 +42,10 @@ export const routes: Routes = [
         path: 'products',
         loadComponent: () => import('./pages/products/products.component').then(m => m.ProductsComponent),
         canActivate: [authGuard]
+    },
+    { 
+        path: 'specification', 
+        component: SpecificationComponent 
     },
     //{ path: 'products', component: ProductsComponent },
    {
