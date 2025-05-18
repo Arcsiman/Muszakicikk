@@ -1,7 +1,7 @@
 import { CartItem } from './cartitem';
 
 export interface User {
-    id: number; 
+    id: string; 
     email: string; 
     password: string; 
     firstname: string; 

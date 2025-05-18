@@ -3,7 +3,14 @@
 <router-outlet></router-outlet> 
 <mat-sidenav-container>
   <mat-sidenav #sidenav>
-    <app-menu [sidenav]="sidenav"></app-menu>
+    <app-menu [sidenav]="sidenav"
+               [isLoggedIn]="isLoggedIn"
+              [userName]="userName"
+              [menuTitle]="'Főmenü'"
+              (logoutEvent)="onLogout()"
+              (menuOpened)="onMenuOpened()"
+              (menuClosed)="onMenuClosed()"
+  ></app-menu>
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar>

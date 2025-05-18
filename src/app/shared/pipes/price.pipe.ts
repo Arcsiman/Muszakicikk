@@ -4,7 +4,7 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'price'
 })
 export class PricePipe implements PipeTransform {
-  transform(value: number, currency: string = 'Ft'): string {
+  transform(value: number | null | undefined, currency: string = 'Ft'): string {
     if (value === null || value === undefined) {
       return '';
     }

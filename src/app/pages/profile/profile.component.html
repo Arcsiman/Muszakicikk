@@ -1,42 +1,63 @@
 <div class="profile-wrapper">
-    <mat-card class="profile-card" appearance="outlined">
-      <mat-card-header>
-        <mat-icon color="primary" class="avatar-icon">account_circle</mat-icon>
-        <mat-card-title>User Profile</mat-card-title>
-        <mat-card-subtitle>Registered Information</mat-card-subtitle>
-      </mat-card-header>
-  
+  <mat-card class="profile-card" appearance="outlined">
+    <mat-card-header>
+      <mat-icon color="primary" class="avatar-icon">account_circle</mat-icon>
+      <mat-card-title>User Profile</mat-card-title>
+      <mat-card-subtitle>Registered Information</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-divider></mat-divider>
+
+    <mat-card-content>
+      <div class="info-row">
+        <mat-icon>email</mat-icon>
+        <span>{{ user?.email }}</span>
+      </div>
+      <div class="info-row">
+        <mat-icon>person</mat-icon>
+        <span>{{ (user?.firstname + ' ' + user?.lastname) | shortName }}</span>
+      </div>
       <mat-divider></mat-divider>
-  
-      <mat-card-content>
-        <div class="info-row">
-          <mat-icon>email</mat-icon>
-          <span>{{ registeredUser.email }}</span>
-        </div>
-        <div class="info-row">
-          <mat-icon>person</mat-icon>
-          <span>{{ registeredUser.firstname }} {{ registeredUser.lastname }}</span>
-        </div>
-        <div class="info-row">
-          <mat-icon>lock</mat-icon>
-          <span>{{ registeredUser.password }}</span>
-        </div>
-        <mat-divider></mat-divider>
+      <div class="info-row">
+        <mat-icon>shopping_cart</mat-icon>
+        <span>Cart items: {{ cart.length }}</span>
+      </div>
+      <div class="info-row">
+        <mat-icon>list</mat-icon>
+        <span>Total quantity: {{ cartStats.totalQuantity }}</span>
+      </div>
+    </mat-card-content>
 
-        
-   
-      </mat-card-content>
+   <mat-card-actions align="end">
+  <button mat-stroked-button color="primary" *ngIf="!isEditing" (click)="startEdit()">Edit</button>
+</mat-card-actions>
+<mat-card-actions align="end">
+  <button mat-stroked-button color="warn" (click)="deleteProfile()">Delete Profile</button>
+</mat-card-actions>
 
-
-      <mat-card-actions align="end">
-        <button mat-stroked-button color="primary">Edit</button>
-      </mat-card-actions>
-      <h3>Cart Items</h3>
-        <div *ngFor="let item of cartItems" class="info-row">
-          <mat-icon>shopping_cart</mat-icon>
-          <span>{{ item.productName }} - {{ item.quantity }} db</span>
-        </div>
-    </mat-card>
-    
+<form *ngIf="isEditing" [formGroup]="editForm" class="edit-form" (ngSubmit)="saveProfile()">
+  <mat-form-field>
+    <mat-label>First Name</mat-label>
+    <input matInput formControlName="firstname">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Last Name</mat-label>
+    <input matInput formControlName="lastname">
+  </mat-form-field>
+  <div class="buttons-row">
+    <button mat-flat-button color="primary" type="submit">Save</button>
+    <button mat-flat-button type="button" (click)="cancelEdit()">Cancel</button>
   </div>
-  
+  <div *ngIf="saveError" class="error">{{ saveError }}</div>
+</form>
+
+    <h3>Cart Items</h3>
+    <div *ngIf="cart.length === 0" class="info-row">
+      <span>No items in cart.</span>
+    </div>
+    <div *ngFor="let item of cart" class="info-row">
+      <mat-icon>shopping_cart</mat-icon>
+      <span>{{ item.productName }} - {{ item.quantity }} db</span>
+    </div>
+  </mat-card>
+</div>
