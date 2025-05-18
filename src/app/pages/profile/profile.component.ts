@@ -53,6 +53,19 @@ export class ProfileComponent implements OnInit, OnDestroy {
       lastname: ['', Validators.required]
     });
   }
+  async deleteProfile() {
+  if (!confirm('Biztosan törölni szeretnéd a profilodat? Ez nem visszavonható!')) {
+    return;
+  }
+  try {
+    await this.userService.deleteProfile();
+    // Opcionálisan: kijelentkeztetés, átirányítás
+    window.location.href = '/'; // vagy this.router.navigateByUrl('/login');
+  } catch (error) {
+    this.saveError = 'Hiba a profil törlése során!';
+    console.error(error);
+  }
+}
 
   startEdit() {
     if (this.user) {

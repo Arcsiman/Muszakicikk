@@ -6,6 +6,9 @@ import { switchMap, take } from 'rxjs/operators';
 import { User } from '../models/user';
 import { CartItem } from '../models/cartitem';
 import { updateDoc } from '@angular/fire/firestore';
+import { deleteDoc } from '@angular/fire/firestore';
+import { deleteUser } from '@angular/fire/auth';
+
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +19,20 @@ export class UserService {
     private firestore: Firestore,
     private authService: AuthService
   ) { }
+
+async deleteProfile(): Promise<void> {
+  const authUser = await firstValueFrom(this.authService.currentUser.pipe(take(1)));
+  if (!authUser) {
+    throw new Error('Nincs bejelentkezett felhasználó!');
+  }
+  // 1. Firestore-ból törlés
+  const userDocRef = doc(this.firestore, 'Users', authUser.uid);
+  await deleteDoc(userDocRef);
+
+  // 2. Auth-ból törlés
+  await deleteUser(authUser);
+}
+
   async updateUserProfile(data: Partial<Pick<User, 'firstname' | 'lastname' | 'cartitem'>>): Promise<void> {
     const authUser = await firstValueFrom(this.authService.currentUser.pipe(take(1)));
     if (!authUser) {

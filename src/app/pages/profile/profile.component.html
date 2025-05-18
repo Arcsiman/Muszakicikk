@@ -31,6 +31,9 @@
    <mat-card-actions align="end">
   <button mat-stroked-button color="primary" *ngIf="!isEditing" (click)="startEdit()">Edit</button>
 </mat-card-actions>
+<mat-card-actions align="end">
+  <button mat-stroked-button color="warn" (click)="deleteProfile()">Delete Profile</button>
+</mat-card-actions>
 
 <form *ngIf="isEditing" [formGroup]="editForm" class="edit-form" (ngSubmit)="saveProfile()">
   <mat-form-field>
